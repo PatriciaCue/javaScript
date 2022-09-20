@@ -1,47 +1,33 @@
 /**
- * REST PARAMETERS y DESTRUCTURING ARRAYS
- * 
+ * COMMON TYPE CONVERSIONS
+ * LOOPS
  */
 
- function myFun(a, b, ...manyMoreArgs) {
-    console.log("a", a);
-    console.log("b", b);
-    console.log("manyMoreArgs", manyMoreArgs);
-  }
-  
-  myFun("one", "two", "three", "four", "five", "six");
-  
-  // Console Output:
-  // a, one
-  // b, two
-  // manyMoreArgs, ["three", "four", "five", "six"]
+//convert to string
+foo.toString();
 
-  /**
-   * DESTRUCTURING ARRAYS
-   */
+//convert string to integer
+Number.parseInt('55'); //55 as a number
 
-  //Ejemplo 1
-  let carIds = [1,2,5];
-  let [car1,car2,car3]= carIds;
-  console.log(car1,car2,car3);
-  // Console Output:
-  // 1  2  5
+//convert string to number
+Number.parseFloat('55.99'); //55.99 as a number
 
-  //Ejemplo 2
-  let carNums = [1,2,5];
-  let carA, remainingCars;
-  [carA, ...remainingCars]=carNums;
-  console.log(carA,remainingCars);
-  // Console Output:
-  // 1  [2,5]
+// BREAK AND CONTINUE
 
-  //Ejemplo 3
-  let carIdenti = [1,2,5];
-  let restoCars;
-  [, ...restoCars]=carIdenti;
-  console.log(restoCars);
-  // Console Output:
-  //[2,5]
+for (let index = 0; index < 5; index++)
+{
+    console.log(i);
+    if (i ===3)
+        break;
+}
+//Console Output:
+// 0 1 2 3
 
-
-
+for (let index = 0; index < 5; index++)
+{
+    if (i ===3)
+        continue;
+    console.log(i);
+}
+//Console Output:
+// 0 1 2 4
