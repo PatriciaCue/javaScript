@@ -1,42 +1,55 @@
 /**
- * DESTRUCTURING OBJECTS
- * SPREAD
+ * OPERATORS
  */
 
-  /**
-   * DESTRUCTURING OBJECTS
-   */
-
-  //Ejemplo 1
-  let car = { id: 5000, style:'convertible'};
-  let {id,style}= car;
-  console.log(id,style);
-  // Console Output:
-  // 5000 convertible
-
-  //Ejemplo 2
-  ({id,style}= car);
-  //{id,style}= car; error!!
+  ////////////////EQUALITY OPERATORS///////////////////////
+  if(var1 == var2){} // puede comparar un number con un string 1 con '1'
+  if(var1 === var2){} //las variables tienen que ser tambien el mismo tipo de dato
+  if(var1 != var2){}
+  if(var1 !== var2){}
   
-   /**
-   * SPREAD SYNTAX, separa el array o la cadena de texto.
-   * Separa iterables
-   */
+  //Ejemplo
+  let id = 123;
+  console.log(id !== "123"); // Console Output:TRUE number es distinto que string
+  console.log(id != "123"); // Console Output:FALSE 123 = '123'
+  console.log(id == "123"); // Console Output:FALSE 123 = '123'
+  console.log(id === "123"); // Console Output:TRUE number es distinto que string
+  
 
-   function startCars(car1, car2, car3) {
-    console.log(car1,car2,car3);
-   }
+   ////////////////UNARY OPERATORS///////////////////////
+  //Ejemplo 
+  let a=3;
+  let b="1967"
+  console.log(a++); // Console Output:3
+  console.log(++a); // Console Output:4
+  console.log(--a); // Console Output:
+  console.log(a--); // Console Output:
+  console.log(+b); // Console Output: 1967 lo convierte en un numero y si b="-3" lo convierte a -3
+  console.log(-a); // Console Output:-3
 
-   let carIds = [100,300,500];
-   startCars(...carIds);
-   // Console Output:
-  // 100 300 500
+  ////////////////LOGICAL OPERATORS///////////////////////
+  //Ejemplo
+   if (var1 > 5 && var2 <100){}
+   if (var1 > 5 || var2 <100){}
+                    //--se evalua primero &&
+   if (var1 > 5 || var2 <100 && var3 ===5){}
+        //--asi se evalua primero ||
+   if ((var1 > 5 || var2 <100) && var3 ===5){}
 
-  function startCars(car1, car2, car3) {
-    console.log(car1,car2,car3);
-   }
+   //Ejemplo
+   let userSettings=null;
+   let defaultSettings= {name:'Default'};
+   console.log(userSettings || defaultSettings);
+   //Console Output: 'Default'
 
-   let carCodes = 'abc';
-   startCars(...carCodes);
-   // Console Output:
-  // a b c
+   let userSettings2={name:'Joe'};
+   let defaultSettings2= {name:'Default'};
+   console.log(userSettings2 || defaultSettings2);
+   //Console Output: 'Joe'
+
+   ////////////////CONDITIONAL OPERATORS///////////////////////
+  //Ejemplo
+  var result = (foo >5)? true:false;
+  
+
+  
