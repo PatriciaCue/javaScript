@@ -1,56 +1,40 @@
 /**
- * PROMISES AND ERROR HANDLING
+ * USING HTTP
  */
 
-     //ERROR IN JS HANDLING USING TRY AND CATCH
-     /**En la ejecucion se lanzara el error pero el programa continuara y veremos continuing por consola */
-     try {
-          let cat= newCar;
-     } catch (error) {
-          console.log('error: ', error);
-     }
-     console.log('continuing....')
-
-     //FINALLY
-     /**Finally siempre se ejecuta */
-     try {
-          let cat= newCar;
-     } catch (error) {
-          console.log('error: ', error);
-     }
-     finally{
-          console.log('continuing....');
-     }
-     
-     //DEFINE ERRORS
-     /** */
-     try {
-          //code here...
-          throw new Error('my custom error');
-     } catch (error) {
-          console.log('error: ', error);
-     }
-     finally{
-          console.log('continuing....');
-     }
-
-     //CREATING A PROMISE
-     let promise = new Promise(
-          function (resolve,reject) {
-               setTimeout(resolve,100,'someValue');
+     //HTTP REQUEST USING XHR
+     let xhttp = new XMLHttpRequest();
+     xhttp.onreadystatechange = function () {
+          if(this.readyState ==4 && this.status ==200){
+               console.log(this.responseText);
           }
-     );
-     console.log(promise);
+     };
 
-     //SETTING A PROMISE
+     xhttp.open("GET", "http://myid.mockapi.io/api/v1/users", true);
+     xhttp.send();
+
+     //HTTP REQUEST USING JQUERY
+     /** instalamos jquery npm instal jquery*/
+     import $ from 'jquery';
+                         //-----------end point--------------//
+     let promise= $.get("http://myid.mockapi.io/api/v1/users",
+          data=> console.log('data: ',data)
+     );
+
      promise.then(
-          value=> console.log('fulfilled: ' + value),
-          error => console.log('rejected: ' +error)
+          data=> console.log('success: ', data),
+          error=> console.log('error: ', error)
      );
 
-
-
-
-
+     //HTTP POST USING JQUERY
+     let user ={
+          name:'Marta Gomez',
+          avatar:'marta.jpg'
+     };
+     let promise2= $.post("http://myid.mockapi.io/api/v1/users", user);
+     promise2.then(
+          data=>console.log('data: ', data),
+          error=>console.log('error: ', error)
+     );
 
      
