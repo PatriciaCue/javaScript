@@ -49,7 +49,29 @@
 
    ////////////////CONDITIONAL OPERATORS///////////////////////
   //Ejemplo
-  var result = (foo >5)? true:false;
-  
+  var result = (foo >5)? true:false; 
+  console.log((5>4) ? 'yes' : 'no'); //Console Output: 'yes'
 
-  
+  ////////////////ASSIGNMENT OPERATORS///////////////////////
+  //Ejemplo
+  let year = 1964;
+
+  year +=10; 
+  console.log(year); //Console Output: 1974
+  year -=10;
+  console.log(year); //Console Output: 1954
+  year /=10;
+  console.log(year); //Console Output: 196,4
+  year *=10;
+  console.log(year); //Console Output: 1954
+  year %=10;
+  console.log(year); //Console Output: 1954
+  year <<=1;
+  console.log(year); //Console Output: 3928, como multiplicarlo por 2
+  year >>=1;
+  console.log(year); //Console Output: 982, como dividirlo por 2
+  year >>>=10; 
+  console.log(year); //Console Output: ???
+
+  ////////////////OPERATORS PRECEDENCE///////////////////////
+  //Buscar tabla en mdn
