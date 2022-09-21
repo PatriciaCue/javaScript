@@ -1,77 +1,134 @@
 /**
- * OPERATORS
+ * FUNCTIONS AND SCOPE
  */
 
-  ////////////////EQUALITY OPERATORS///////////////////////
-  if(var1 == var2){} // puede comparar un number con un string 1 con '1'
-  if(var1 === var2){} //las variables tienen que ser tambien el mismo tipo de dato
-  if(var1 != var2){}
-  if(var1 !== var2){}
+  ////////////////FUNCTION SCOPE///////////////////////
+  //Ejemplo 1
+  function startCar(CarId) {
+     let message = 'Starting...';
+  }
+
+  startCar(123);
+  console.log(message); // Error message no esta definido despues de la funcion
+
+
+  //Ejemplo 2
+  function startCar2(CarId) {
+     let message = 'Starting...';
+     let startFn= function turnKey(){
+          console.log(message); //'Starting...'
+     };
+     startFn();
+  }
+  startCar(123);
+  //Console Output: 'Starting...'
+
+  //Ejemplo 3
+  function startCar2(CarId) {
+     let message = 'Starting...';
+     let startFn= function turnKey(){
+          let message='Override';
+     };
+     startFn();
+     console.log(message); //'Starting...'
+  }
+  startCar(123);
   
-  //Ejemplo
-  let id = 123;
-  console.log(id !== "123"); // Console Output:TRUE number es distinto que string
-  console.log(id != "123"); // Console Output:FALSE 123 = '123'
-  console.log(id == "123"); // Console Output:FALSE 123 = '123'
-  console.log(id === "123"); // Console Output:TRUE number es distinto que string
+   ////////////////BLOCK SCOPE///////////////////////
+  //Ejemplo 1
+  let message = 'Outside';
+  if (5===5){
+     let message='Equal';
+     console.log(message); //Console Output: 'Equal'
+  }
+  console.log(message); //Console Output: 'Outside'
+
+  //Ejemplo 2
+  var message2 = 'Outside';
+  if (5===5){
+    var message2='Equal';
+    console.log(message); //Console Output: 'Equal'
+  }
+  console.log(message); //Console Output: 'Equal'
+
+  ////////////////  IIFE's  ///////////////////////
+  //Ejemplo 1
+  (function(){
+     console.log('in function');
+  })(); // de esta manera se ejecutaria la funcion directamente
+
+  ////////////////  Clousures  ///////////////////////
+  //Ejemplo 1
+  let app=(function(){
+     let CarId= 123;
+     let getId= function() {
+          return CarId;
+     };
+     return {getId:getId};
+  })();
+  console.log(app.getId()); 
+  //Console Output: 123
+
+
+  ////////////////  CALL AND APPLY  ///////////////////////
+  //Ejemplo 1 CALL
+  let o={
+     carId: 123,
+     getId: function() {
+          return this.carId;
+     }
+  };
+  let newCar = {carId: 456};
+  console.log(o.getId.call(newCar)); //Console Output: 456
+
+  //Ejemplo 2 APPLY
+  let q={
+     carId: 123,
+     getId: function(prefix) {
+          return prefix + this.carId;
+     }
+  };
+  let newCar2 = {carId: 456};
+  console.log(q.getId.apply(newCar2,['ID: '])); //Console Output: ID: 456
+
+  ////////////////  BIND  ///////////////////////
+  //Ejemplo 1
+  let s={
+     carId: 123,
+     getId: function() {
+          return this.carId;
+     }
+  };
+  let newCar3 = {carId: 456};
+  let newFn = s.getId.bind(newCar3);
+  console.log(newFn()); //Console Output: 456
+
+  ////////////////  ARROW FUNCTION  ///////////////////////
+  //Ejemplo 1
+  let getId=()=>123;
+  console.log(getId()); //Console Output: 123
+
+  //Ejemplo 2
+  let getId2=(prefix)=> prefix + 123;
+  console.log(getId2('ID: ')); //Console Output: ID: 123
+
+  //Ejemplo 3
+  let getId3=(prefix, suffix)=> prefix + 123 + suffix;
+  console.log(getId3('ID: ', '!')); //Console Output: ID: 123!
+
+  ////////////////  DEFAULT PARAMETERS  ///////////////////////
+  //Ejemplo 1
+  let trackCar = function(carId, city='NY'){
+     console.log(`Tracking ${carId} in ${city}.`);
+  };
+  console.log(trackCar(123)); //Console Output: Tracking 123 in NY.
+  console.log(trackCar(123, 'Chicago')); //Console Output: Tracking 123 in Chicago.
+
+  
   
 
-   ////////////////UNARY OPERATORS///////////////////////
-  //Ejemplo 
-  let a=3;
-  let b="1967"
-  console.log(a++); // Console Output:3
-  console.log(++a); // Console Output:4
-  console.log(--a); // Console Output:
-  console.log(a--); // Console Output:
-  console.log(+b); // Console Output: 1967 lo convierte en un numero y si b="-3" lo convierte a -3
-  console.log(-a); // Console Output:-3
 
-  ////////////////LOGICAL OPERATORS///////////////////////
-  //Ejemplo
-   if (var1 > 5 && var2 <100){}
-   if (var1 > 5 || var2 <100){}
-                    //--se evalua primero &&
-   if (var1 > 5 || var2 <100 && var3 ===5){}
-        //--asi se evalua primero ||
-   if ((var1 > 5 || var2 <100) && var3 ===5){}
 
-   //Ejemplo
-   let userSettings=null;
-   let defaultSettings= {name:'Default'};
-   console.log(userSettings || defaultSettings);
-   //Console Output: 'Default'
 
-   let userSettings2={name:'Joe'};
-   let defaultSettings2= {name:'Default'};
-   console.log(userSettings2 || defaultSettings2);
-   //Console Output: 'Joe'
+  
 
-   ////////////////CONDITIONAL OPERATORS///////////////////////
-  //Ejemplo
-  var result = (foo >5)? true:false; 
-  console.log((5>4) ? 'yes' : 'no'); //Console Output: 'yes'
-
-  ////////////////ASSIGNMENT OPERATORS///////////////////////
-  //Ejemplo
-  let year = 1964;
-
-  year +=10; 
-  console.log(year); //Console Output: 1974
-  year -=10;
-  console.log(year); //Console Output: 1954
-  year /=10;
-  console.log(year); //Console Output: 196,4
-  year *=10;
-  console.log(year); //Console Output: 1954
-  year %=10;
-  console.log(year); //Console Output: 1954
-  year <<=1;
-  console.log(year); //Console Output: 3928, como multiplicarlo por 2
-  year >>=1;
-  console.log(year); //Console Output: 982, como dividirlo por 2
-  year >>>=10; 
-  console.log(year); //Console Output: ???
-
-  ////////////////OPERATORS PRECEDENCE///////////////////////
-  //Buscar tabla en mdn
