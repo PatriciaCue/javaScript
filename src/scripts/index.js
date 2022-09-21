@@ -1,134 +1,96 @@
 /**
- * FUNCTIONS AND SCOPE
+ * OBJECTS AND ARRAYS
  */
 
-  ////////////////FUNCTION SCOPE///////////////////////
-  //Ejemplo 1
-  function startCar(CarId) {
-     let message = 'Starting...';
-  }
 
-  startCar(123);
-  console.log(message); // Error message no esta definido despues de la funcion
-
-
-  //Ejemplo 2
-  function startCar2(CarId) {
-     let message = 'Starting...';
-     let startFn= function turnKey(){
-          console.log(message); //'Starting...'
-     };
-     startFn();
-  }
-  startCar(123);
-  //Console Output: 'Starting...'
-
-  //Ejemplo 3
-  function startCar2(CarId) {
-     let message = 'Starting...';
-     let startFn= function turnKey(){
-          let message='Override';
-     };
-     startFn();
-     console.log(message); //'Starting...'
-  }
-  startCar(123);
-  
-   ////////////////BLOCK SCOPE///////////////////////
-  //Ejemplo 1
-  let message = 'Outside';
-  if (5===5){
-     let message='Equal';
-     console.log(message); //Console Output: 'Equal'
-  }
-  console.log(message); //Console Output: 'Outside'
-
-  //Ejemplo 2
-  var message2 = 'Outside';
-  if (5===5){
-    var message2='Equal';
-    console.log(message); //Console Output: 'Equal'
-  }
-  console.log(message); //Console Output: 'Equal'
-
-  ////////////////  IIFE's  ///////////////////////
-  //Ejemplo 1
-  (function(){
-     console.log('in function');
-  })(); // de esta manera se ejecutaria la funcion directamente
-
-  ////////////////  Clousures  ///////////////////////
-  //Ejemplo 1
-  let app=(function(){
-     let CarId= 123;
-     let getId= function() {
-          return CarId;
-     };
-     return {getId:getId};
-  })();
-  console.log(app.getId()); 
-  //Console Output: 123
-
-
-  ////////////////  CALL AND APPLY  ///////////////////////
-  //Ejemplo 1 CALL
-  let o={
-     carId: 123,
-     getId: function() {
-          return this.carId;
+     //CONSTRUCTOR
+     function Car(id) {
+          this.carId = id;
+          this.start= function(){
+               console.log('start: ' +this.carId);
+          }
      }
-  };
-  let newCar = {carId: 456};
-  console.log(o.getId.call(newCar)); //Console Output: 456
+     let car = new Car(123);
+     car.start();
+     //Console Output: start: 123
 
-  //Ejemplo 2 APPLY
-  let q={
-     carId: 123,
-     getId: function(prefix) {
-          return prefix + this.carId;
+     //PROTOYPES
+     function Cars(id) {
+          this.carId = id;
      }
-  };
-  let newCar2 = {carId: 456};
-  console.log(q.getId.apply(newCar2,['ID: '])); //Console Output: ID: 456
-
-  ////////////////  BIND  ///////////////////////
-  //Ejemplo 1
-  let s={
-     carId: 123,
-     getId: function() {
-          return this.carId;
+     Cars.prototype.start= function(){
+          console.log('start: ' +this.carId);
      }
-  };
-  let newCar3 = {carId: 456};
-  let newFn = s.getId.bind(newCar3);
-  console.log(newFn()); //Console Output: 456
+     let cars = new Cars(123);
+     car.start(); //Console Output: start: 123
 
-  ////////////////  ARROW FUNCTION  ///////////////////////
-  //Ejemplo 1
-  let getId=()=>123;
-  console.log(getId()); //Console Output: 123
+     //EXPANDING OBJECTS USING PROTOTYPES
+     String.prototype.hello=function(){
+          return this.toString()+'Hello';
+     };
+     console.log('foo'.hello()); //Console Output: foo Hello
 
-  //Ejemplo 2
-  let getId2=(prefix)=> prefix + 123;
-  console.log(getId2('ID: ')); //Console Output: ID: 123
+     //JSON
+     //Convert to JSON
+     let car3={
+          id:123,
+          style:'convertible'
+     };
+     console.log(JSON.stringify(car3)); //Console Output: {"id":123, "style":"convertible"}  --> cadena de texto
 
-  //Ejemplo 3
-  let getId3=(prefix, suffix)=> prefix + 123 + suffix;
-  console.log(getId3('ID: ', '!')); //Console Output: ID: 123!
+     //Convert to JSON
+     let car4=[
+          {carId:123},
+          {carId:456},
+          {carId:789},
+     ];
+     console.log(JSON.stringify(car4)); //Console Output: [{"carId":123}, {"carId":456},{"carId":789}] --> cadena de texto
 
-  ////////////////  DEFAULT PARAMETERS  ///////////////////////
-  //Ejemplo 1
-  let trackCar = function(carId, city='NY'){  //El parametro por defecto tiene que estar situado el ultimo?
-     console.log(`Tracking ${carId} in ${city}.`);
-  };
-  console.log(trackCar(123)); //Console Output: Tracking 123 in NY.
-  console.log(trackCar(123, 'Chicago')); //Console Output: Tracking 123 in Chicago.
+     //Convert to JSON
+     let jsonIn = `
+          [
+               {"carId":123},
+               {"carId":456},
+               {"carId":789},
+          ]
+     `
+     let carIds= JSON.parse(jsonIn);
+     console.log(carIds); //Console Output: [{carId:123}, {carId:456},{carId:789}] --> devuelve 3 objetos
+
+     //ARRAY ITERATION
+     let car5=[
+          {carId:123 , style: 'sedan'},
+          {carId:456 , style: 'ford'},
+          {carId:789 , style: 'sedan'}
+     ];
+
+     car5.forEach(car => {
+          console.log(car);
+     });
+     car5.forEach((car,index) => console.log(car, index));
+
+     //.filter(), .find() (Selecciona el primer elemento que haga match con la condicion), .every()
+     let carIds2=[
+          {carId:123 , style: 'sedan'},
+          {carId:456 , style: 'ford'},
+          {carId:789 , style: 'sedan'}
+     ];
+
+     let sedan= carIds2.filter(
+          car=>car.style === 'sedan'
+     );
+     console.log(sedan);
 
 
-  
+     let carIds3=[
+          {carId:123 , style: 'sedan'},
+          {carId:456 , style: 'ford'},
+          {carId:789 , style: 'sedan'}
+     ];
 
+     let result= carIds3.every(
+          car=>car.carId > 0
+     );
+     console.log(result); //Console Output: TRUE, si algunos de los carId fuera negativo daria FALSE
 
-
-
-  
 
