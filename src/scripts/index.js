@@ -1,96 +1,63 @@
 /**
- * OBJECTS AND ARRAYS
+ * CLASES Y MODULOS
  */
 
+     //IMPORTING A MODULE
+     //Hemos creado la clase car, y la tenemos que importar en 
+     //el fichero que vamos a utilizar
+     import{Car} from './models/car.js';
 
-     //CONSTRUCTOR
-     function Car(id) {
-          this.carId = id;
-          this.start= function(){
-               console.log('start: ' +this.carId);
+
+     let car8 = new Car(123);
+     console.log(car8.identify()); 
+     //Console Output: CarId: 123
+
+
+     //CLASS BASICS, CONSTRUCTOR AND PROPERTIES
+
+     class Car{
+          constructor(id){
+               this.id=id;
+          }
+          identify(){
+               return `Car Id:${this.id}`;
           }
      }
+
      let car = new Car(123);
-     car.start();
-     //Console Output: start: 123
+     console.log(car.identify()); 
+     //Console Output: CarId: 123
 
-     //PROTOYPES
-     function Cars(id) {
-          this.carId = id;
+     class Car{
+          constructor(id){
+               this.id=id;
+          }
+          identify(suffix){
+               return `Car Id:${this.id} ${suffix}`;
+          }
      }
-     Cars.prototype.start= function(){
-          console.log('start: ' +this.carId);
+     let car2 = new Car(123);
+     console.log(car.identify('!!!!')); 
+     //Console Output: CarId: 123 !!!!
+
+     //INHERITANCE
+     class Vehicle{
+          constructor(){
+               this.type='car';
+          }
+          start(){
+               return `Starting: ${this.type}`;
+          }
      }
-     let cars = new Cars(123);
-     car.start(); //Console Output: start: 123
 
-     //EXPANDING OBJECTS USING PROTOTYPES
-     String.prototype.hello=function(){
-          return this.toString()+'Hello';
-     };
-     console.log('foo'.hello()); //Console Output: foo Hello
-
-     //JSON
-     //Convert to JSON
-     let car3={
-          id:123,
-          style:'convertible'
-     };
-     console.log(JSON.stringify(car3)); //Console Output: {"id":123, "style":"convertible"}  --> cadena de texto
-
-     //Convert to JSON
-     let car4=[
-          {carId:123},
-          {carId:456},
-          {carId:789},
-     ];
-     console.log(JSON.stringify(car4)); //Console Output: [{"carId":123}, {"carId":456},{"carId":789}] --> cadena de texto
-
-     //Convert to JSON
-     let jsonIn = `
-          [
-               {"carId":123},
-               {"carId":456},
-               {"carId":789},
-          ]
-     `
-     let carIds= JSON.parse(jsonIn);
-     console.log(carIds); //Console Output: [{carId:123}, {carId:456},{carId:789}] --> devuelve 3 objetos
-
-     //ARRAY ITERATION
-     let car5=[
-          {carId:123 , style: 'sedan'},
-          {carId:456 , style: 'ford'},
-          {carId:789 , style: 'sedan'}
-     ];
-
-     car5.forEach(car => {
-          console.log(car);
-     });
-     car5.forEach((car,index) => console.log(car, index));
-
-     //.filter(), .find() (Selecciona el primer elemento que haga match con la condicion), .every()
-     let carIds2=[
-          {carId:123 , style: 'sedan'},
-          {carId:456 , style: 'ford'},
-          {carId:789 , style: 'sedan'}
-     ];
-
-     let sedan= carIds2.filter(
-          car=>car.style === 'sedan'
-     );
-     console.log(sedan);
+     class Car extends Vehicle {
+          start(){
+               return 'in Car start' + super.start();
+          }
+     }
+     let car6 = new Car();
+     console.log(car6.start); 
+     //Console Output: 'in Car start Starting: car ' 
 
 
-     let carIds3=[
-          {carId:123 , style: 'sedan'},
-          {carId:456 , style: 'ford'},
-          {carId:789 , style: 'sedan'}
-     ];
-
-     let result= carIds3.every(
-          car=>car.carId > 0
-     );
-     console.log(result); //Console Output: TRUE, si algunos de los carId fuera negativo daria FALSE
-
-
+     //CREATING A MODULE
