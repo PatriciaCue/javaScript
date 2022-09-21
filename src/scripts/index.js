@@ -1,47 +1,42 @@
 /**
- * REST PARAMETERS y DESTRUCTURING ARRAYS
- * 
+ * DESTRUCTURING OBJECTS
+ * SPREAD
  */
 
- function myFun(a, b, ...manyMoreArgs) {
-    console.log("a", a);
-    console.log("b", b);
-    console.log("manyMoreArgs", manyMoreArgs);
-  }
-  
-  myFun("one", "two", "three", "four", "five", "six");
-  
-  // Console Output:
-  // a, one
-  // b, two
-  // manyMoreArgs, ["three", "four", "five", "six"]
-
   /**
-   * DESTRUCTURING ARRAYS
+   * DESTRUCTURING OBJECTS
    */
 
   //Ejemplo 1
-  let carIds = [1,2,5];
-  let [car1,car2,car3]= carIds;
-  console.log(car1,car2,car3);
+  let car = { id: 5000, style:'convertible'};
+  let {id,style}= car;
+  console.log(id,style);
   // Console Output:
-  // 1  2  5
+  // 5000 convertible
 
   //Ejemplo 2
-  let carNums = [1,2,5];
-  let carA, remainingCars;
-  [carA, ...remainingCars]=carNums;
-  console.log(carA,remainingCars);
-  // Console Output:
-  // 1  [2,5]
+  ({id,style}= car);
+  //{id,style}= car; error!!
+  
+   /**
+   * SPREAD SYNTAX, separa el array o la cadena de texto.
+   * Separa iterables
+   */
 
-  //Ejemplo 3
-  let carIdenti = [1,2,5];
-  let restoCars;
-  [, ...restoCars]=carIdenti;
-  console.log(restoCars);
-  // Console Output:
-  //[2,5]
+   function startCars(car1, car2, car3) {
+    console.log(car1,car2,car3);
+   }
 
+   let carIds = [100,300,500];
+   startCars(...carIds);
+   // Console Output:
+  // 100 300 500
 
+  function startCars(car1, car2, car3) {
+    console.log(car1,car2,car3);
+   }
 
+   let carCodes = 'abc';
+   startCars(...carCodes);
+   // Console Output:
+  // a b c
