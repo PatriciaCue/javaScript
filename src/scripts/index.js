@@ -1,23 +1,55 @@
 /**
- * PROGRAMMING THE BOM AND DOM
+ * PROMISES AND ERROR HANDLING
  */
 
-     //The Window Object
+     //ERROR IN JS HANDLING USING TRY AND CATCH
+     /**En la ejecucion se lanzara el error pero el programa continuara y veremos continuing por consola */
+     try {
+          let cat= newCar;
+     } catch (error) {
+          console.log('error: ', error);
+     }
+     console.log('continuing....')
 
-     //Timers
+     //FINALLY
+     /**Finally siempre se ejecuta */
+     try {
+          let cat= newCar;
+     } catch (error) {
+          console.log('error: ', error);
+     }
+     finally{
+          console.log('continuing....');
+     }
+     
+     //DEFINE ERRORS
+     /** */
+     try {
+          //code here...
+          throw new Error('my custom error');
+     } catch (error) {
+          console.log('error: ', error);
+     }
+     finally{
+          console.log('continuing....');
+     }
 
-     //The location Object
+     //CREATING A PROMISE
+     let promise = new Promise(
+          function (resolve,reject) {
+               setTimeout(resolve,100,'someValue');
+          }
+     );
+     console.log(promise);
 
-     //The document Object
+     //SETTING A PROMISE
+     promise.then(
+          value=> console.log('fulfilled: ' + value),
+          error => console.log('rejected: ' +error)
+     );
 
-     //Selecting DOM Elements (.getElementById, .getElementsByClassName, .getElementsByTagName)
 
-     //Modifying DOM Elements (.textContent, .setAttribute, .classList, .style)
-     let element = document.getElementById('elementId');
-     element.textContent='new txt';
-     element.setAttribute('name', 'nameValue');
-     element.classList.add('myClassName');
-     element.style.color='blue';
+
 
 
 
