@@ -118,13 +118,13 @@
 
   ////////////////  DEFAULT PARAMETERS  ///////////////////////
   //Ejemplo 1
-  let trackCar = function(carId, city='NY'){
+  let trackCar = function(carId, city='NY'){  //El parametro por defecto tiene que estar situado el ultimo?
      console.log(`Tracking ${carId} in ${city}.`);
   };
   console.log(trackCar(123)); //Console Output: Tracking 123 in NY.
   console.log(trackCar(123, 'Chicago')); //Console Output: Tracking 123 in Chicago.
 
-  
+
   
 
 
